@@ -9,7 +9,7 @@
 
 # The key point of my solution to this algorithm is to use radix way to sort the num list
 # After the sorting, we put the number into a stack and finally get the correct return value
-
+# Finally I found use List.sort is much faster than my sort 
 class Solution:
 
 	# 10 lists   -  0  1  2  3  4  5  6  7  8  9
