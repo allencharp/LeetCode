@@ -16,22 +16,22 @@ class Solution:
 
 		dict = {}
 		
-		# copy start list node
+		# for the use of deep copy
 		copyHead = None
+		
+		# last one, for the 'next' attribute
+		previous = None
 		
 		# store the first head
 		temp = head
-
-		# last one
-		previous = None
-		
-		# init the label and next, not random
-		while(temp != None): # label = 1			
+		# deep copy the 'label' and 'next', not 'random'
+		while(temp != None): 		
 			copyHead = RandomListNode(temp.label)
 			
 			copyHead.next = temp.next
 			copyHead.random = temp.random
-			# deep copy of the next
+			
+			# deep copy of the 'next'
 			if(previous != None):
 				dict[previous].next = copyHead
 			
@@ -41,10 +41,9 @@ class Solution:
 			previous = temp
 
 			temp = temp.next
-	
-		
-		temp = head
-
+			
+		temp = head	
+		# now deep copy the 'random' 
 		while(temp != None):
 			random = temp.random
 
@@ -56,7 +55,6 @@ class Solution:
 			
 		temp = head
 		return dict[temp]
-
 		
 r1 = RandomListNode(1)
 r2 = RandomListNode(2)
