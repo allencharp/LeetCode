@@ -15,23 +15,29 @@ class Solution:
 			return None
 
 		dict = {}
+		
+		# copy start list node
 		copyHead = None
 		
+		# store the first head
 		temp = head
 
+		# last one
 		previous = None
+		
 		# init the label and next, not random
-		while(temp != None): # label = 1
-			
+		while(temp != None): # label = 1			
 			copyHead = RandomListNode(temp.label)
 			
 			copyHead.next = temp.next
 			copyHead.random = temp.random
+			# deep copy of the next
 			if(previous != None):
 				dict[previous].next = copyHead
 			
 			dict[temp] = copyHead
 			
+			# note this position
 			previous = temp
 
 			temp = temp.next
