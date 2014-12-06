@@ -33,13 +33,14 @@ class Solution:
 	def CheckIP(self, ipN):
 		try:
 			# such as 010
-			if(len(ipN) > 1 and ipN[0] == '0'):
-				return False
-			num = int(ipN)
-			if(num >= 0 and num <= 255):
-				return True
+			if(not(len(ipN) > 1 and ipN[0] == '0')):				
+				num = int(ipN)
+				if(num >= 0 and num <= 255):
+					return True
 		except:
 			return False
+		return False
+			
 		
 s = Solution()
 print s.restoreIpAddresses("010010")
