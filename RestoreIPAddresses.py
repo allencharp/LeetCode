@@ -26,8 +26,8 @@ class Solution:
 					ip2 = s[p1:p2]
 					ip3 = s[p2:p3]
 					ip4 = s[p3:len(s)]
-					if(self.CheckIP(ip1) and self.CheckIP(ip2) and self.CheckIP(ip3) and self.CheckIP(ip4)):
-						rtnList.append(ip1+'.'+ip2+'.'+ip3+'.'+ip4)
+					if(all(map(self.CheckIP, [ip1, ip2, ip3, ip4]))):
+						rtnList.append(ip1+'.'+ip2+'.'+ip3+'.'+ip4);
 		return rtnList
 					
 	def CheckIP(self, ipN):
