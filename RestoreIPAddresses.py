@@ -26,7 +26,7 @@ class Solution:
 					ip2 = s[p1:p2]
 					ip3 = s[p2:p3]
 					ip4 = s[p3:len(s)]
-					if(all(map(self.CheckIP, [ip1, ip2, ip3, ip4]))):
+					if(all(self.CheckIP(ipN) for ipN in [ip1, ip2, ip3, ip4])):
 						rtnList.append(ip1+'.'+ip2+'.'+ip3+'.'+ip4);
 		return rtnList
 					
