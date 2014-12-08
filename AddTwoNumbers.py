@@ -9,9 +9,13 @@ class Solution:
     def addTwoNumbers(self, l1, l2):
 	
 		isAboveTen = False
-		lastNode = None
+		
+		previousNode = None
+		
 		firstNode = None
+		
 		node = None
+		
 		while(l1 != None or l2 != None):
 			
 			add1 = l1.val if l1 != None else 0
@@ -30,12 +34,12 @@ class Solution:
 					
 			node = ListNode(result)	
 					
-			if(lastNode != None):
-				lastNode.next = node
+			if(previousNode != None):
+				previousNode.next = node
 			else:
 				firstNode = node
 			
-			lastNode = node
+			previousNode = node
 			
 			if(l1 != None):
 				l1 = l1.next
@@ -44,7 +48,7 @@ class Solution:
 		
 		if(isAboveTen):
 			node = ListNode(1)
-			lastNode.next = node
+			previousNode.next = node
 			
 		return firstNode
 		
