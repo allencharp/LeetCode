@@ -28,9 +28,9 @@ class Solution:
 			
 			nextValue = head.val
 			potValue = potNode.val
-			if(nextValue == potValue):
-				continue
 			
+			if(nextValue == potValue):
+				continue		
 			else:
 				potNode.next = ListNode(head.val)
 				potNode = potNode.next
