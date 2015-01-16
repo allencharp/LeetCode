@@ -46,7 +46,6 @@ def main():
 
 	n1.next = n2
 	n2.next = n3
-
 	
 	s = Solution()
 	n = s.deleteDuplicates(n1)
