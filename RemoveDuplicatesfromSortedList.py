@@ -21,7 +21,7 @@ class Solution:
 			return head
 		
 		potNode = ListNode(head.val)
-		rtnNode = potNode 
+		rtnNode = potNode
 		
 		while(head and head.next):
 			head = head.next
