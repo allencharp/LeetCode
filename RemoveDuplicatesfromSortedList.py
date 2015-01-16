@@ -30,6 +30,7 @@ class Solution:
 			potValue = potNode.val
 			if(nextValue == potValue):
 				continue
+			
 			else:
 				potNode.next = ListNode(head.val)
 				potNode = potNode.next
