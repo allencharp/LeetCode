@@ -19,7 +19,7 @@ class Solution:
 	def longestConsecutive(self, num):
 		 
 		self.number = num
-
+		#
 		# loc = 1
 		
 		# maxDigit = self.GetMaxDigit(num)
