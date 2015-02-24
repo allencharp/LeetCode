@@ -16,37 +16,94 @@
 
 class Solution:
 	def __init__(self):
-		self.searchlist = {}
+		self.alivelist = []
+		
+		self.currentStackAlive = False
+		self.currentStack = [] 
+		
 		self.b = None
 	# @param board, a 2D array
 	# Capture all regions by modifying the input board in-place.
 	# Do not return any value.
 	def solve(self, board):
 		self.b = board
-		for i in range(board):
-			for j in range(board[i]):
+		for i in range(len(board)):
+			for j in range(len(board[i])):
 				if(board[i][j] == 'O' and self.IsSearched((i,j)) is False):
+					self.currentStackAlive = False
 					self.AnalysisO((i,j))
+					
+					if(self.currentStackAlive is False):
+						self.ChangeOToX()
+					else:
+						self.PutToAliveList()
+						
+					self.currentStack = []
+					
+		board = self.b
 	
 	def IsSearched(self, loc):
-		if(loc in self.searchlist):
+		if((loc in self.alivelist) or (loc in self.currentStack)):
 			return True
 		return False
 	
 	def AnalysisO(self, loc):
 		(i,j) = loc
-		if(self.IsWall(loc) is False):
-			pass
+		if(self.IsWall(loc) is False and self.IsSearched(loc) is False):
+			self.currentStack.append(loc)
+			if(self.IsUpSurrend(loc) is False):
+				self.AnalysisO((i-1,j))
+			elif(self.IsDownSurrend(loc) is False):
+				self.AnalysisO((i+1, j))
+			elif(self.IsLeftSurrend(loc) is False):
+				self.AnalysisO((i, j-1))
+			elif(self.IsRightSurrend(loc) is False):
+				self.AnalysisO((i, j+1))
+		elif(self.IsWall(loc) and self.b[i][j] == 'O'):
+			self.currentStackAlive = True
+			
 	def IsUpSurrend(self, loc):
-		pass
+		(i,j) = loc
+		return self.IsSurrend((i-1,j))
+	
 	def IsLeftSurrend(self, loc):
-		pass
+		(i,j) = loc
+		return self.IsSurrend((i,j-1))
+	
 	def IsRightSurrend(self, loc):
-		pass
+		(i,j) = loc
+		return self.IsSurrend((i,j+1))
+	
 	def IsDownSurrend(self, loc):
-		pass
+		(i,j) = loc
+		return self.IsSurrend((i+1,j))
+	
+	def IsSurrend(self, loc):
+		(i,j) = loc
+		if(self.b[i][j] == 'X'):
+			return True
+		return False
+	
 	def IsWall(self, loc):
 		(i,j) = loc;
-		if(i == len(self.b) -1 or j == len(self.b[i]) - 1):
+		if(i == len(self.b) - 1 or j == len(self.b[i]) - 1):
 			return True
 		return False;
+	
+	def ChangeOToX(self):
+		for item in range(len(self.currentStack)):
+			(i,j) = self.currentStack[item]
+			self.b[i][j] = 'X'
+		
+	def PutToAliveList(self):
+		self.alivelist.append(self.currentStack)
+	
+	
+board = [
+		['X','X','X','X','X','X'],
+		['X','O','O','X','O','O'],
+		['X','X','X','X','X','X']
+		]
+s = Solution()
+s.solve(board)
+print board
