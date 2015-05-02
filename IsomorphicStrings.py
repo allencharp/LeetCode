@@ -15,16 +15,34 @@
 # You may assume both s and t have the same length.
 
 class Solution:
-    # @param {string} s
-    # @param {string} t
-    # @return {boolean}
-    def isIsomorphic(self, s, t):
-    	for character in s:
-    		pass
-    	return True
+	def __init__(self):
+		self.sdict = {}
+		self.tdict = {}
+	# @param {string} s
+	# @param {string} t
+	# @return {boolean}
+	def isIsomorphic(self, s, t):
+		if (len(s) != len(t)):
+			return False;
+
+		for (sLoc, tLoc) in zip(range(len(s)),range(len(t))):
+			sChar = s[sLoc]
+			tChar = t[tLoc]
+			if (not (sChar in self.sdict) and (not (tChar in self.tdict))):
+				self.sdict[sChar] = sLoc
+				self.tdict[tChar] = tLoc
+			elif(sChar in self.sdict and tChar in self.tdict):
+				if(self.sdict[sChar] != self.tdict[tChar]):
+					return False;
+				self.sdict[sChar] = sLoc
+				self.tdict[tChar] = tLoc
+			else:
+				return False
+
+		return True
 
 
-s = "paper"
-t = "title"
-s = Solution()
-print s.isIsomorphic(s, t)
+s = "aba"
+t = "baa"
+solu = Solution()
+print solu.isIsomorphic(s, t)
