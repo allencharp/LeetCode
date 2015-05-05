@@ -18,5 +18,13 @@ class Solution:
 	def rotate(self, nums, k):
 		if(len(nums) <= k):
 			return
-		for i in range(len(nums)):
-			
+		for i in range(k):
+			nums[i], nums[len(nums)-k+i] = nums[len(nums)-k+i],nums[i]
+
+		for i in range(k,len(nums)-1):
+			nums[i],nums[i+1] = nums[i+1],nums[i]
+
+s = Solution()
+num = [1,2]
+s.rotate(num,0)
+print num
