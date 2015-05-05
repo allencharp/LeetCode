@@ -16,15 +16,14 @@ class Solution:
 	# @param k, num of steps
 	# @return nothing, please modify the nums list in-place.
 	def rotate(self, nums, k):
-		if(len(nums) <= k):
-			return
-		for i in range(k):
-			nums[i], nums[len(nums)-k+i] = nums[len(nums)-k+i],nums[i]
-
-		for i in range(k,len(nums)-1):
-			nums[i],nums[i+1] = nums[i+1],nums[i]
+		rtn = []
+		for i in range(len(nums)):
+			newLoc = i+k if i+k <= len(nums) else i+k-len(nums)
+			print newLoc
+			rtn[newLoc] = nums[i]
+		return rtn
 
 s = Solution()
-num = [1,2]
-s.rotate(num,0)
-print num
+num = [1,2,3]
+rtn = s.rotate(num,4)
+print rtn
