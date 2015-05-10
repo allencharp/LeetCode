@@ -21,11 +21,23 @@ class Solution:
 	def canFinish(self, numCourses, prerequisites):
 		storelist = []
 		for i, courses in enumerate(prerequisites):
-			for j, course in enumerate(courses):
-				if(len(storelist) == 0):
-					tempList = []
-					tempList.append(course)
-					storelist.append(tempList)
-				else:
-					
-    		
+			storeIndex = self.UpdateStoreList(storelist, storelist, courses)
+	# @param {storeList} 
+	def UpdateStoreList(self, storeList, courses):
+		for course in courses:
+			if(self.ExistInStoreList(storeList, course) is not -1):
+				newIndex = self.MoveInStoreList(storelist, courses)
+			else:
+				self.InsertCouses(storelist, courses)
+
+	def InsertCouses(self, storelist, courses):
+		pass
+		
+	def ExistInStoreList(self, storeList, course):
+		for i, items in storelist:
+			if(course in storelist):
+				return i
+		return -1
+
+	def MoveInStoreList(self, storeList, courses):
+		pass
