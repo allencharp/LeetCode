@@ -14,94 +14,37 @@
 # There are a total of 2 courses to take. To take course 1 you should have finished course 0, 
 # and to take course 0 you should also have finished course 1. So it is impossible.
 
-class TempCourse:
-	def __init__(self):
-		originLoc = 0;
-		newLoc = 0;
-		course = ""
+
 
 class Solution:	
 	# @param {integer} numCourses
 	# @param {integer[][]} prerequisites
 	# @return {boolean}
 	def canFinish(self, numCourses, prerequisites):
-		coursestorelist = []
-		for courses in (prerequisites):
-			issucceed = self.UpdateStoreList(coursestorelist, courses)
-			if not issucceed:
-				return False
-		return True			
-	# @param {storeList} 
-	def UpdateStoreList(self, storelist, courses):
-		tempList = []
-		for i,course in enumerate(courses):			
-			temp = TempCourse()
-			temp.course = course
-			newIndex = 0
-			where = self.ExistInStoreList(storelist, course)
-			
-			if(where is -1):
-				newIndex = self.MoveInStoreList(storelist, tempList, course)
-			else:
-				newIndex = self.RefreshCousesList(storelist, tempList, course,where, i)
+		storeList = [];
+		for i in range(numCourses):
+			temp = []
+			storeList.append(temp)
 
-			temp.originLoc = i
-			temp.newLoc = newIndex
-			tempList.append(temp)
-			if not self.IsSuccess(tempList):
-				return False
-		return True;
+		for courses in prerequisites:
+			if len(courses) > numCourses:
+				return
+			self.analysisCourse(storeList,numCourses, courses)	
 
-	
+	def analysisCourse(self, storelist, total, courses):
+		for index,item in enumerate(courses):
+			if not self.ExistInStoreList(storelist, item):
+				(f, t) = self.GetRange(storelist, len(courses), index)
+
 	def ExistInStoreList(self, storelist, course):
 		for i, items in enumerate(storelist):
 			if(course in items):
-				return i
-		return -1
+				return True
+		return False
 
-	def MoveInStoreList(self, storelist, tempList,course):
-		if len(storelist) == 0: #or len(tempList) == 0:
-			temp = []
-			temp.append(course)
-			storelist.append(temp)
-			return 0
-		elif len(tempList) == 0:
-			storelist[0].append(course)
-			return 0
-		elif (len(storelist) <= tempList[len(tempList)-1].newLoc + 1):
-			temp = []
-			temp.append(course)
-			storelist.append(temp)
-			return len(storelist)-1
-		else:
-			storelist[tempList[len(tempList)-1].newLoc + 1].append(course)
-			return tempList[len(tempList)-1].newLoc + 1
-
-	def RefreshCousesList(self, storelist,tempList, course, where, currentIndex):
-		if(len(tempList) == 0):
-			return where
-		elif where == tempList[currentIndex-1].newLoc:
-			storelist[where].remove(course)
-			if(len(storelist)-1 == where):
-				temp = []
-				temp.append(course)
-				storelist.append(temp)
-			else:
-				storelist[where+1].append(course)
-			return where + 1
-		else:
-			return where
-
-	def IsSuccess(self, tempList):
-		for i,temp in enumerate(tempList):
-			cur = temp.newLoc;
-			for j in range(i,len(tempList)):
-				nex = tempList[j].newLoc
-				if(cur > nex):
-					return False
-		return True
-
+	def GetRange(self, storelist, len, index):
+		pass
 
 s = Solution()
-temp = [[1,2,3],[1,4,5],[1,2,4],[1,]]
+temp = [[1,2,3],[1,4,5],[1,2,4],[1,5]]
 print s.canFinish(5, temp)
