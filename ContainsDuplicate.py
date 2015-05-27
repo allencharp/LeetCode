@@ -9,10 +9,10 @@ class Solution:
 		dict = {}
 		for i,num in enumerate(nums):
 			if num in dict:
-				return False
+				return True
 			else:
 				dict[num]=i
-		return True
+		return False
 
 list = [1,2,2]
 s = Solution();
