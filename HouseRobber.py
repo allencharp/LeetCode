@@ -9,14 +9,30 @@
 # Special thanks to @ifanchu for adding this problem and creating all test cases. Also thanks to @ts for adding additional test cases.
 
 class Solution:
+	
+	def __init__(self):
+		self.cacheDict = {}
+	
 	# @param {integer[]} nums
 	# @return {integer}
 	def rob(self, nums):
-		nums_1 = [v for i,v in enumerate(nums) if i%2 == 1]
-		nums_2 = [v for i,v in enumerate(nums) if i%2 == 0]
-		
-		return max(sum(nums_1), sum(nums_2))
+		if(len(nums) == 0):
+			return 0
+		elif(len(nums) == 1):
+			return nums[0]
+		elif(len(nums) == 2):
+			if not len(nums) in self.cacheDict:
+				self.cacheDict[len(nums)] = max(nums[0],nums[1])
+				return max(nums[0],nums[1])
+			else:
+				return self.cacheDict[len(nums)]
+		else:
+			if not len(nums) in self.cacheDict:
+				self.cacheDict[len(nums)] = max(self.rob(nums[:len(nums)-1]), self.rob(nums[:len(nums)-2])+nums[len(nums)-1])
+				return max(self.rob(nums[:len(nums)-1]), self.rob(nums[:len(nums)-2])+nums[len(nums)-1])
+			else:
+				return self.cacheDict[len(nums)]
 		
 
 s = Solution()
-print s.rob([2,7,9,3,1])
+print s.rob([1,1])
