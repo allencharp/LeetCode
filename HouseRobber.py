@@ -35,7 +35,9 @@ class Solution:
 		elif(len(nums) == 2):
 			return max(nums[0],nums[1])
 		else:
-			return max(self.rob(nums[:len(nums)-1]), self.rob(nums[:len(nums)-2])+nums[len(nums)-1])
+			last_time_maxvalue = self.rob(nums[:len(nums)-1])
+			last_last_time_maxvalue = self.rob(nums[:len(nums)-2])+nums[len(nums)-1] 
+			return max(last_time_maxvalue, last_last_time_maxvalue)
 			
 
 s = Solution()
