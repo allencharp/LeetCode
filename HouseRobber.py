@@ -13,26 +13,30 @@ class Solution:
 	def __init__(self):
 		self.cacheDict = {}
 	
-	# @param {integer[]} nums
-	# @return {integer}
+	def cacheDecorator(function):
+		
+		def wrapper(self, *args, **kwargs):
+			nums = args[0]
+			if len(nums) in self.cacheDict:
+				return self.cacheDict[len(nums)]
+			else:
+				v = function(self, nums)
+				self.cacheDict[len(nums)] = v
+				return v
+		
+		return wrapper
+	
+	@cacheDecorator
 	def rob(self, nums):
 		if(len(nums) == 0):
 			return 0
 		elif(len(nums) == 1):
 			return nums[0]
 		elif(len(nums) == 2):
-			if not len(nums) in self.cacheDict:
-				self.cacheDict[len(nums)] = max(nums[0],nums[1])
-				return max(nums[0],nums[1])
-			else:
-				return self.cacheDict[len(nums)]
+			return max(nums[0],nums[1])
 		else:
-			if not len(nums) in self.cacheDict:
-				self.cacheDict[len(nums)] = max(self.rob(nums[:len(nums)-1]), self.rob(nums[:len(nums)-2])+nums[len(nums)-1])
-				return max(self.rob(nums[:len(nums)-1]), self.rob(nums[:len(nums)-2])+nums[len(nums)-1])
-			else:
-				return self.cacheDict[len(nums)]
-		
+			return max(self.rob(nums[:len(nums)-1]), self.rob(nums[:len(nums)-2])+nums[len(nums)-1])
+			
 
 s = Solution()
-print s.rob([1,1])
+print s.rob([1,2,4,8,1,1,9])
