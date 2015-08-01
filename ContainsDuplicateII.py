@@ -3,26 +3,27 @@
 #indices i and j in the array such that 
 #nums[i] = nums[j] and the difference between i and j is at most k.
 class Solution:
+	def __init__(self):
+		self.dict = {} # Data Structure :: value : [loc1, loc2, ...]
+	
 	# @param {integer[]} nums
 	# @param {integer} k
 	# @return {boolean}
 	def containsNearbyDuplicate(self, nums, k):
 		for loc, value in enumerate(nums):
-			if(loc is not len(nums)-1):
-				isExist = self.containsDuplicateInlenght(value, nums[loc+1:], min(k, len(nums[loc+1:])))
-				if(isExist):
-					return True
-		return False
-			
-			
-	def containsDuplicateInlenght(self,value, num, len):
+			if self.dict.has_key(value):
+				self.dict[value].append(loc)
+			else:
+				self.dict[value] = [loc]
 		
-		isExist = False;
-		for i in range(len):
-			if num[i] == value:
-				isExist = True
-				break
-		return isExist
+		for key,value in self.dict.iteritems():
+			if(len(value) <= 1):
+				continue
+			for loc in range(len(value)):
+				if loc - 1 >= 0:
+					if (value[loc] - value[loc-1] <= k):
+						return True
+		return False		
 	
 s = Solution()
 
