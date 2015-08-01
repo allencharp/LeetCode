@@ -17,14 +17,11 @@ class Solution:
 				self.dict[value] = [loc]
 		
 		for key,value in self.dict.iteritems():
-			if(len(value) <= 1):
-				continue
-			for loc in range(len(value)):
-				if loc - 1 >= 0:
-					if (value[loc] - value[loc-1] <= k):
+			for loc in range(len(value))[1:]:
+				if (value[loc] - value[loc-1] <= k):
 						return True
 		return False		
 	
 s = Solution()
 
-print s.containsNearbyDuplicate([1,2,3,4,5,1], 4)
+print s.containsNearbyDuplicate([1,2,3,4,5,1], 5)
