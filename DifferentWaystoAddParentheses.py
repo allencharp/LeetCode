@@ -20,8 +20,21 @@
 # (((2*3)-4)*5) = 10
 # Output: [-34, -14, -10, -10, 10]
 
-class Solution:
-    # @param {string} input
-    # @return {integer[]}
+class Solution(object):
     def diffWaysToCompute(self, input):
+        """
+        :type input: str
+        :rtype: List[int]
+        """
         pass
+    def getNumber(self, input):
+        pass
+
+    def getOperator(self, input):
+        pass
+
+    def catalan_number(n):
+        nm = dm = 1
+        for k in range(2, n+1):
+          nm, dm = ( nm*(n+k), dm*k )
+        return nm/dm
