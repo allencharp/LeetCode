@@ -21,20 +21,39 @@
 # Output: [-34, -14, -10, -10, 10]
 
 class Solution(object):
+    #def Solution(self):
+    operator = ["+", "-", "*"]
+    numList = []
+    operList = []
+
     def diffWaysToCompute(self, input):
+
+        self.getNumber(input)
+        self.getOperator(input)
+
+
         """
         :type input: str
         :rtype: List[int]
         """
         pass
     def getNumber(self, input):
-        pass
+        import re
+        self.numList = re.split("\-|\+|\*", input)
+        #return self.numList
 
     def getOperator(self, input):
-        pass
+        for i in range(len(input)):
+            if input[i] == "+" or input[i] == "-" or input[i] == "*":
+                self.operList.append(input[i])
+
 
     def catalan_number(n):
         nm = dm = 1
         for k in range(2, n+1):
           nm, dm = ( nm*(n+k), dm*k )
         return nm/dm
+
+s = Solution()
+s.diffWaysToCompute("2*3-4*5")
+print s.operList
