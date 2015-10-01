@@ -33,37 +33,46 @@ class Solution(object):
         self.getNumber(input)
         self.getOperator(input)
 
-        n = len(self.numList)
+        numLen = len(self.numList)
 
-        if n == 0:
-            self.rtnDict[0] = []
-            self.rtnDict[0].append(0)
-            return self.rtnDict[0]
-        elif(n == 1):
-            self.rtnDict[1] = []
-            self.rtnDict[1].append(self.numList[0])
-            return self.rtnDict[1]
-        elif(n == 2):
-            num1 = self.numList[0]
-            num2 = self.numList[1]
-            operator = self.operList[0]
-            self.rtnList[2] = []
-            self.rtnList[2].append(self.getResult(num1, num2, operator))
-            return self.rtnDict[2]
-        else:
-            numadd = self.numList[len(self.numList) - 1]
-            numlast = self.numList[len(self.numList) - 2]
+        if(numLen == 0):
+            return None
+
+        for n in range(1, numLen+1):
+
+            if n == 1:
+                self.rtnDict[1] = []
+                self.rtnDict[1].append((int)(self.numList[0]))
+
+            elif n == 2:
+                num1 = self.numList[0]
+                num2 = self.numList[1]
+                operator = self.operList[0]
+                self.rtnDict[2] = []
+                self.rtnDict[2].append(self.getResult(num1, num2, operator))
+
+            else:
+                thisNum = self.numList[n - 1]
+                lastNum = self.numList[n - 2]
+                thisOperator = self.operList[n - 1 - 1]
+                lastOperator = self.operList[n - 1 - 2]
+
+                self.rtnDict[n] = []
+
+                # catalan number
+                # this number +-* last time possibilities
+                for i in (self.rtnDict[n-1]):
+
+                    self.rtnDict[n].append(self.getResult(i, thisNum, thisOperator))
+
+                thisResult = self.getResult(lastNum, thisNum, thisOperator)
+                for i in self.rtnDict[n-2]:
+                    self.rtnDict[n].append(self.getResult(i, thisResult, lastOperator))
 
 
+        return self.rtnDict[numLen]
 
-            pass
 
-
-        """
-        :type input: str
-        :rtype: List[int]
-        """
-        return rtn
     def getResult(self, num1str, num2str, operator):
         num1 = (int)(num1str)
         num2 = (int)(num2str)
@@ -92,6 +101,6 @@ class Solution(object):
     #     return nm/dm
 
 s = Solution()
-print s.diffWaysToCompute("2")
+print s.diffWaysToCompute("2*3-4*5")
 print s.rtnDict
 
