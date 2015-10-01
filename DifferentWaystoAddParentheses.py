@@ -23,7 +23,6 @@
 class Solution(object):
 
     def __init__(self):
-        self.operator = ["+", "-", "*"]
         self.numList = []
         self.operList = []
         self.rtnDict = {} # {key, [value1, value2]}
@@ -33,45 +32,51 @@ class Solution(object):
         self.getNumber(input)
         self.getOperator(input)
 
-        numLen = len(self.numList)
+        num = len(self.numList)
 
-        if(numLen == 0):
+        if num == 0:
             return None
-
-        for n in range(1, numLen+1):
-
+        for n in range(1,num+1):
             if n == 1:
-                self.rtnDict[1] = []
-                self.rtnDict[1].append((int)(self.numList[0]))
-
+                self.rtnDict[self.numList[0]] = []
+                self.rtnDict[self.numList[0]].append((int)(self.numList[0]))
             elif n == 2:
                 num1 = self.numList[0]
                 num2 = self.numList[1]
                 operator = self.operList[0]
-                self.rtnDict[2] = []
-                self.rtnDict[2].append(self.getResult(num1, num2, operator))
-
+                self.rtnDict[num1+operator+num2] = []
+                self.rtnDict[num1+operator+num2].append(self.getResult(num1, num2, operator))
             else:
                 thisNum = self.numList[n - 1]
                 lastNum = self.numList[n - 2]
                 thisOperator = self.operList[n - 1 - 1]
                 lastOperator = self.operList[n - 1 - 2]
 
-                self.rtnDict[n] = []
+                lastInput = self.getThisInput(n-2)
+                thisInput = self.getThisInput(n-1);
 
-                # catalan number
-                # this number +-* last time possibilities
-                for i in (self.rtnDict[n-1]):
+                self.rtnDict[thisInput] = []
 
-                    self.rtnDict[n].append(self.getResult(i, thisNum, thisOperator))
+                for i in (self.rtnDict[lastInput]):
+                    self.rtnDict[thisInput].append(self.getResult(i, thisNum, thisOperator))
 
                 thisResult = self.getResult(lastNum, thisNum, thisOperator)
-                for i in self.rtnDict[n-2]:
-                    self.rtnDict[n].append(self.getResult(i, thisResult, lastOperator))
+                for i in self.rtnDict[lastInput]:
+                    self.rtnDict[thisInput].append(self.getResult(i, thisResult, lastOperator))
 
+                firstNum = self.numList[0]
+                firstOperator = self.operList[0]
+                anotherList = self.diffWaysToCompute(input[len(firstNum)+len(firstOperator)])
+                for i in anotherList:
+                    self.rtnDict[thisInput].append(self.getResult(firstNum, i, firstOperator))
 
-        return self.rtnDict[numLen]
+        return self.rtnDict[input]
 
+    def getThisInput(self, n):
+        rtn = self.numList[0]
+        for i in range(n):
+            rtn = rtn + self.operList[i]+self.numList[i+1]
+        return rtn
 
     def getResult(self, num1str, num2str, operator):
         num1 = (int)(num1str)
