@@ -7,10 +7,10 @@
 # Follow up:
 # Could you do it without any loop/recursion in O(1) runtime?
 
+
 class Solution(object):
+
     def addDigits(self, num):
-        """
-        :type num: int
-        :rtype: int
-        """
-        pass
+        if num == 0:
+            return 0
+        return (num - 1) % 9 + 1
