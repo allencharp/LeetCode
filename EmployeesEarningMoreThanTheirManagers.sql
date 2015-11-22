@@ -17,4 +17,6 @@
 -- +----------+
 -- Subscribe to see which companies asked this question
 
- 
+SELECT e2.`Name` FROM Employee e1 INNER JOIN Employee e2
+ON e1.id = e2.`ManagerId`
+WHERE e1.`Salary` < e2.`Salary`
