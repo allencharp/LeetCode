@@ -11,9 +11,20 @@ class Solution(object):
         if len(nums) == 0 or len(nums) == 1:
             return nums
 
-        for loc in range(len(nums)):
+        howmanyZero = 0
+
+        loc = 0
+        while loc < len(nums):
             if(nums[loc] == 0 and loc != len(nums) - 1):
                 self.moveZeroToLast(loc, nums)
+                howmanyZero = howmanyZero + 1
+                loc = loc - 1
+
+            if(howmanyZero == len(nums) - loc):
+                break;
+
+            loc = loc + 1
+
         return nums
 
 
@@ -23,6 +34,6 @@ class Solution(object):
 
 
 s = Solution()
-print s.moveZeroes([0,0,1])
+print s.moveZeroes([1,3,0,5,0,2])
 
 
