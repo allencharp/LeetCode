@@ -14,11 +14,14 @@ class Solution(object):
 
 		rtnList = []
 
-		for alph in s:
+		for i in range(len(s)-1, 0, -1):
+			alph = s[i]
 			if alph not in rtnList:
 				rtnList.append(alph)
 
-		rtnList.sort()
+		# what is lexicographical order ?
+		# https://en.wikipedia.org/wiki/Lexicographical_order
+		rtnList.reverse()
 
 		return "".join(rtnList)
 
