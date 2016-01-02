@@ -13,20 +13,16 @@ class Solution(object):
 	def removeDuplicateLetters(self, s):
 		rtnList = []
 
-		for i in range(len(s)):
-			alph = s[i]
-			if alph not in rtnList:
-				rtnList.append(alph)
-			else:
-				if(len(rtnList) == 0):
-					continue;
+		start,loc = self.whereToStart(0, s)
+		rtnList.append(start)
 
-				for loc, val in enumerate(rtnList):
-					if val == alph and loc != len(rtnList) - 1:
+		while loc < len(s):
+			loc2 = loc
+			(start,loc) = self.whereToStart(loc, s)
+			if loc == loc2:
+				break;
 
-						if(rtnList[loc+1] < val):
-							rtnList.remove(val)
-							rtnList.append(val)
+			rtnList.append(start)
 
 		# what is lexicographical order ?
 		# https://en.wikipedia.org/wiki/Lexicographical_order
@@ -34,5 +30,29 @@ class Solution(object):
 
 		return "".join(rtnList)
 
-s = Solution()
-print s.removeDuplicateLetters("bcabc")
+	def whereToStart(self, froms, s):
+		wheretostart = s[froms]
+		where = froms
+		for loc in range(froms, len(s)):
+			cur = s[loc]
+
+			if cur < wheretostart and self.isContains(self.getDistinctList(s[0:loc]), self.getDistinctList(s[loc:len(s)])):
+				wheretostart = cur
+				where = loc
+		return (wheretostart, where)
+
+	def getDistinctList(self, s):
+		rtnList = []
+		for item in s:
+			if item not in rtnList:
+				rtnList.append(item)
+		return rtnList
+
+	def isContains(self, frontList, rearList):
+		return True
+
+# s = Solution()
+# print s.removeDuplicateLetters("bcabc")
+list1 = [1,2]
+list2 = [2,3,1]
+print list2.
