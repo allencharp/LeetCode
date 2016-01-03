@@ -12,23 +12,18 @@
 class Solution(object):
 	def removeDuplicateLetters(self, s):
 
-		s = self.deleteUseless(s)
-
 		if(len(s) == 0 or len(s) == 1):
 			return s
 
+		s = self.deleteSameOneBesideMe(s)
+
 		result = ""
 
-		start, loc = self.whereToStart(s)
-		result += start
-		s = s[loc+1:].replace(start, "")
 		while len(s) != 0:
-			#if loc != len(s) - 1:
-			tempLoc = loc
 			(start, loc) = self.whereToStart(s)
-
-			s = s[loc+1:].replace(start, "")
 			result += start
+			s = s[loc+1:].replace(start, "")
+
 
 		# what is lexicographical order ?
 		# https://en.wikipedia.org/wiki/Lexicographical_order
@@ -36,7 +31,7 @@ class Solution(object):
 
 		return "".join(self.getDistinctList(result))
 
-	def deleteUseless(self, s):
+	def deleteSameOneBesideMe(self, s):
 		if(len(s) == 0 or len(s) == 1):
 			return s
 		rtn = s[0]
@@ -48,6 +43,7 @@ class Solution(object):
 	def whereToStart(self, s):
 		wheretostart = s[0]
 		where = 0
+
 		for loc in range(len(s)):
 			cur = s[loc]
 
