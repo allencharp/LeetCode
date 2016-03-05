@@ -80,6 +80,12 @@ class Solution(object):
 					and route.startX != v.startX \
 					and (route.startX < v.endX <= route.endX or route.startX > v.endX >= route.endX):
 					return True
+
+			hList = [r for r in self.route if r.direction == "H"]
+			for h in hList:
+				if(route.endY == h.startY and route.endX == h.startX):
+					return True
+
 			return False
 		else:
 			hList = [r for r in self.route if r.direction == "H"]
@@ -89,6 +95,12 @@ class Solution(object):
 					and route.startY != h.startY \
 					and (route.startY < h.endY <= route.endY or route.startY > h.endY >= route.endY):
 					return True
+
+			vList = [r for r in self.route if r.direction == "V"]
+			for v in vList:
+				if(route.endY == v.startY and route.endX == v.startX):
+					return True
+
 			return False
 
 
