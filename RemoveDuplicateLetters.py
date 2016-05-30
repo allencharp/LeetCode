@@ -24,7 +24,6 @@ class Solution(object):
 			result += start
 			s = s[loc+1:].replace(start, "")
 
-
 		# what is lexicographical order ?
 		# https://en.wikipedia.org/wiki/Lexicographical_order
 		# e.g. a < aa < aaa < ab < abb < abc < b < bcd < be < ...
