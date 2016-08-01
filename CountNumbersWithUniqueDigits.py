@@ -21,13 +21,12 @@ class Solution(object):
 			return 9
 		else:
 			last_time = self.countNumberWithMultiDigits(n-1)
-			return last_time + \
-				9*( \
-					last_time + last_time/9 \ # 0 scenario
-					+ 10*(n-2) + (10 ** (n-2)-2) \
-				)
+			return last_time + ((10 * (n-1) - 1 + 9) * 9 )
+
+
 
 s = Solution()
-print s.countNumbersWithUniqueDigits(4)
+print s.countNumbersWithUniqueDigits(3)
+
 # 3- 739
 # 4 - 5275
