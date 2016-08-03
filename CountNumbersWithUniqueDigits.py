@@ -21,12 +21,19 @@ class Solution(object):
 			return 9
 		else:
 			last_time = self.countNumberWithMultiDigits(n-1)
-			return last_time + ((10 * (n-1) - 1 + 9) * 9 )
-
+			return last_time + ((10 * (n-1) - 1 + 9*self.getNum(n-2) ) * 9 )
+	
+	def getNum(self, n):
+		rtn = 0
+		for i in range(n):
+			rtn = 10**(n-1-i)**i   + rtn
+		
+		return rtn
 
 
 s = Solution()
-print s.countNumbersWithUniqueDigits(3)
+print s.getNum(1)
+#print s.countNumbersWithUniqueDigits(3)
 
 # 3- 739
 # 4 - 5275
