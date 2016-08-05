@@ -21,12 +21,12 @@ class Solution(object):
 			return 9
 		else:
 			last_time = self.countNumberWithMultiDigits(n-1)
-			return last_time + ((self.getNum(n-1, True) + 9 * self.getNum(n-1)) * 9)
+			return last_time + (self.getNum(n-1, True) + 9 * self.getNum(n-1)) * 9
 	
 	def getNum(self, sum, incl_first = False):
 		rtn = 0
 		for i in range(1, sum+1):
-			if not incl_first and i == 1:
+			if (not incl_first) and i == 1:
 				continue
 				
 			rtn += 9 ** (sum - i) * self.getCNum(sum, i)
@@ -44,8 +44,9 @@ class Solution(object):
 		return sun/mother
 
 s = Solution()
-print s.countNumbersWithUniqueDigits(4)
+print s.countNumbersWithUniqueDigits(3)
 #print s.countNumbersWithUniqueDigits(3)
-
+print s.getNum(3, True)
+#print s.getCNum(3,1)
 # 3- 739
 # 4 - 5275
