@@ -3,7 +3,6 @@
 # Example:
 # Given n = 2, return 91. (The answer should be the total numbers in the range of 0 <= x < 100
 # , excluding [11,22,33,44,55,66,77,88,99])
-739
 class Solution(object):
 	def countNumbersWithUniqueDigits(self, n):
 		"""
@@ -26,10 +25,11 @@ class Solution(object):
 	def getNum(self, sum, incl_first = False):
 		rtn = 0
 		for i in range(1, sum+1):
-			if (not incl_first) and i == 1:
-				continue
-				
-			rtn += 9 ** (sum - i) * self.getCNum(sum, i)
+			if (incl_first):
+				rtn += 9 ** (sum - i) * self.getCNum(sum, i)
+			elif i >1:
+				rtn += 8 ** (sum - i) * self.getCNum(sum, i)
+			
 		
 		return rtn
 	
@@ -44,9 +44,10 @@ class Solution(object):
 		return sun/mother
 
 s = Solution()
-print s.countNumbersWithUniqueDigits(3)
+print s.countNumbersWithUniqueDigits(5)
 #print s.countNumbersWithUniqueDigits(3)
 print s.getNum(3, True)
 #print s.getCNum(3,1)
 # 3- 739
 # 4 - 5275
+# 5 - 32491
