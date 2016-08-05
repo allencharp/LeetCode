@@ -21,18 +21,30 @@ class Solution(object):
 			return 9
 		else:
 			last_time = self.countNumberWithMultiDigits(n-1)
-			return last_time + ((10 * (n-1) - 1 + 9*self.getNum(n-2) ) * 9 )
+			return last_time + ((self.getNum(n-1, True) + 9 * self.getNum(n-1)) * 9)
 	
-	def getNum(self, n):
+	def getNum(self, sum, incl_first = False):
 		rtn = 0
-		for i in range(n):
-			rtn = 10**(n-1-i)**i   + rtn
+		for i in range(1, sum+1):
+			if not incl_first and i == 1:
+				continue
+				
+			rtn += 9 ** (sum - i) * self.getCNum(sum, i)
 		
 		return rtn
-
+	
+	def getCNum(self, sum, n):
+		mother = 1
+		sun = 1
+		
+		for i in range(sum-n+1, sum+1):
+			sun *= i
+		for i in range(1,n+1):
+			mother *= i
+		return sun/mother
 
 s = Solution()
-print s.getNum(1)
+print s.countNumbersWithUniqueDigits(4)
 #print s.countNumbersWithUniqueDigits(3)
 
 # 3- 739
