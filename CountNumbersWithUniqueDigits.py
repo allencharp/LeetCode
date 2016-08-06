@@ -5,48 +5,28 @@
 # , excluding [11,22,33,44,55,66,77,88,99])
 class Solution(object):
 	def countNumbersWithUniqueDigits(self, n):
-		"""
-		:type n: int
-		:rtype: int
-		"""
-		return 10**n - self.countNumberWithMultiDigits(n)
-
-	def countNumberWithMultiDigits(self, n):
 		if n == 0:
-			return 0
+			return 1
 		elif n == 1:
-			return 0
+			return 10
 		elif n == 2:
-			return 9
+			return 91
 		else:
-			last_time = self.countNumberWithMultiDigits(n-1)
-			return last_time + (self.getNum(n-1, True) + 9 * self.getNum(n-1)) * 9
-	
-	def getNum(self, sum, incl_first = False):
-		rtn = 0
-		for i in range(1, sum+1):
-			if (incl_first):
-				rtn += 9 ** (sum - i) * self.getCNum(sum, i)
-			elif i >1:
-				rtn += 8 ** (sum - i) * self.getCNum(sum, i)
-			
+			last_time = self.countNumbersWithUniqueDigits(n-1)
+			return last_time + self.getComposeNum(n-1)*9
 		
+	def getComposeNum(self, sum):
+		start = 9
+		rtn = 1
+		for i in range(sum):
+			rtn *= start
+			start -= 1
 		return rtn
-	
-	def getCNum(self, sum, n):
-		mother = 1
-		sun = 1
 		
-		for i in range(sum-n+1, sum+1):
-			sun *= i
-		for i in range(1,n+1):
-			mother *= i
-		return sun/mother
 
 s = Solution()
 print s.countNumbersWithUniqueDigits(5)
-#print s.countNumbersWithUniqueDigits(3)
-print s.getNum(3, True)
+print s.getComposeNum(2)
 #print s.getCNum(3,1)
 # 3- 739
 # 4 - 5275
