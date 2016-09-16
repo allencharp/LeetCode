@@ -11,14 +11,24 @@
 class Solution(object):
 	
 	def __init__(self):
-		self.repeatList = []
+		self.repeatLocList = []
 	
 	def firstUniqChar(self, s):
-		"""
-		:type s: str
-		:rtype: int
-		"""
-		pass
-	
-	def cache(self, *args):
-		pass
+		
+		if len(s) == 0:
+			return -1
+		
+		for loc, value in enumerate(s):
+			is_repeat = False
+			if loc not in self.repeatLocList:
+				for l, v in enumerate(s[loc+1::]):
+					if v == value:
+						self.repeatLocList.append(loc+l+1)
+						is_repeat = True
+			if not is_repeat and loc not in self.repeatLocList:
+				return loc
+		return -1
+			
+s = "cc"
+solution = Solution()
+print solution.firstUniqChar(s)
