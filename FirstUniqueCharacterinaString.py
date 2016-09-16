@@ -121,4 +121,4 @@ s="sdnvlbkrmtbol" \
 "hdtxcqublpmbfdtetttfdpceppfooiwgljjtunubornvwrqtdwbrddhcdismsoptaercmbcwdtswqhwqqcnfmqhqfdadlxekwlcejcoamlcebfvtbxgqqacwoknthevmoinsvjrvqkfitllvafvswbxfoljeaveawrsdhglxhiubu"
 s1 = 'loveleetcode'
 solution = Solution()
-print solution.firstUniqChar(s)
+print solution.firstUniqChar(s1)
