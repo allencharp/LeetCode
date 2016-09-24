@@ -11,10 +11,19 @@
 # Subscribe to see which companies asked this question
 
 class Solution(object):
+	
+
+	
 	def lengthOfLongestSubstring(self, s):
 		
 		if len(s) <= 1:
 			return len(s)
+		
 		for loc, val in enumerate(s):
-				for i in s[loc:]:
-					pass
+			longest_str_set = longest_str_set | set(val)
+			
+			for i,v in enumerate(s[loc:]):
+				if v in longest_str_set:
+					break;
+				else:
+					longest_str_set |= set(v)
