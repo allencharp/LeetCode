@@ -12,7 +12,9 @@
 
 class Solution(object):
 	def lengthOfLongestSubstring(self, s):
-		"""
-		:type s: str
-		:rtype: int
-		"""
+		
+		if len(s) <= 1:
+			return len(s)
+		for loc, val in enumerate(s):
+				for i in s[loc:]:
+					pass
