@@ -13,19 +13,25 @@ class Solution(object):
         cur = head
         nxt = head.next
         
-        while nxt.next:
+        headflag = True;
+        while nxt:
             temp = ListNode(cur.val)
-            temp.next = cur.next
+            temp.next = nxt
             
             if nxt.next:
                 temp.next = nxt.next
-            
-            cur.next = temp
+            else:
+                temp.next = None
+
+            if headflag:
+                cur.next = None
+                headflag = False
+                
             nxt.next = cur
-            cur 
-        
-        nxt.next = cur
-        cur.next = None
+            cur = nxt
+            nxt = temp.next
+                    
+        return cur
             
             
 class ListNode(object):
@@ -35,14 +41,14 @@ class ListNode(object):
         
 a = ListNode(1)
 b = ListNode(2)
-c = ListNode(3)
+#c = ListNode(3)
 a.next = b
-b.next = c
+#b.next = c
 
 s = Solution()
 s.reverseList(a)
 
-start = c
+start = b
 while(start):
     print start.val
     start = start.next
