@@ -7,7 +7,7 @@
 #
 # Note:
 # Given m, n satisfy the following condition:
-# 1 ≤ m ≤ n ≤ length of list.
+# 1 <= m <= n <= length of list.
 
 # Definition for singly-linked list.
 # class ListNode(object):
@@ -15,11 +15,60 @@
 #         self.val = x
 #         self.next = None
 
+
+
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
 class Solution(object):
     def reverseBetween(self, head, m, n):
-        """
-        :type head: ListNode
-        :type m: int
-        :type n: int
-        :rtype: ListNode
-        """
+        
+        if m > n or m == n:
+            return head
+        if head is None or head.next is None:
+            return head
+        
+        start_node  = None
+        end_node = None
+        for i in range(1, n):
+            head = head.next
+            if head == None:
+	            return head
+            
+            if i == m:
+                start_node = head
+            if i == n:
+
+            
+        
+        
+    def reverseList(self, head):
+        if head is None or head.next is None:
+            return head
+
+        cur = head
+        nxt = head.next
+
+        headflag = True;
+        while nxt:
+            temp = ListNode(cur.val)
+            temp.next = nxt
+    
+            if nxt.next:
+                temp.next = nxt.next
+            else:
+                temp.next = None
+    
+            if headflag:
+                cur.next = None
+                headflag = False
+    
+            nxt.next = cur
+            cur = nxt
+            nxt = temp.next
+
+        return cur
+
+print range(1,1)
