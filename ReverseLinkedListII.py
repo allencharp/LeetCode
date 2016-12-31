@@ -26,6 +26,11 @@ class Solution(object):
 		
 		if(head is None or head.next is None):
 			return head
+		if m < 1 or n < 1 or m == n:
+			return head
+		
+		headtemp = ListNode(head.val)
+		headtemp.next = head.next
 		
 		isStartFromFirst = False;
 		isEndFromLast = False;
@@ -38,7 +43,7 @@ class Solution(object):
 		
 		count = 1
 		while(head):
-			if m == 0:
+			if m == 1:
 				isStartFromFirst = True
 			elif count + 1 == m:
 				begin_node = head
@@ -57,18 +62,31 @@ class Solution(object):
 			head = head.next
 			
 		newStart = self.reverseList(startNode, endNode)
-		begin_node.next = newStart
+		temp = ListNode(newStart.val)
+		temp.next = newStart.next
+		
+		if not isStartFromFirst:
+			begin_node.next = newStart
+		
 		if not isEndFromLast:
 			while(newStart):
 				if newStart.next is None:
-					newStart.next = begin_node
+					newStart.next = finish_node
+					newStart = newStart.next
+					break
 				else:
 					newStart = newStart.next
 					
 		
+		if isStartFromFirst:
+			return temp
+		elif m == 2:
+			return begin_node
+		else:
+			return headtemp
 	
 	def reverseList(self, head, end):
-		if head is None or head.next is None:
+		if head is None or head.next is None or head is end:
 			return head
 		
 		cur = head
@@ -76,8 +94,6 @@ class Solution(object):
 		
 		headflag = True;
 		while nxt:
-			if nxt is end:
-				return cur
 			
 			temp = ListNode(cur.val)
 			temp.next = nxt
@@ -93,6 +109,10 @@ class Solution(object):
 			
 			nxt.next = cur
 			cur = nxt
+			
+			if nxt is end:
+				return cur
+			
 			nxt = temp.next
 		
 		return cur
@@ -104,5 +124,10 @@ c = ListNode(3)
 b.next = c
 d = ListNode(4)
 c.next = d
+e = ListNode(5)
+d.next =e
 s = Solution()
-print s.reverseBetween(a,2,3)
+final = s.reverseBetween(a,2,3)
+while final:
+	print final.val
+	final=final.next
