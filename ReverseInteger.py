@@ -2,14 +2,21 @@
 #
 # Example1: x = 123, return 321
 # Example2: x = -123, return -321
-
 class Solution(object):
 	def reverse(self, x):
 		strx = str(x)
+		retnVal = 0;
 		if strx[0] == '-':
-			return int(strx[0]+(self.__reverseNum(strx[1:])))
+			retnVal = int(strx[0]+(self.__reverseNum(strx[1:])))
 		
-		return int(self.__reverseNum(strx))
+		else:
+			retnVal = int(self.__reverseNum(strx))
+		
+		# overflow issue
+		if retnVal >= 2**31-1 or retnVal <= -(2**31-1):
+			retnVal = 0
+		
+		return retnVal
 		
 	
 	def __reverseNum(self, x):
