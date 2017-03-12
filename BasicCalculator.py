@@ -65,6 +65,7 @@ class Solution(object):
 				if oper == "-":
 					res = int(left) - int(right)
 				will_cal = False
+				self.oper_without_backet_stack.append(res)
 				
 			if v in ["+", "-"]:
 				will_cal = True
@@ -73,7 +74,7 @@ class Solution(object):
 
 	def __get_backet_string(self):
 		
-		# ) to pop
+		# )
 		if self.oper_with_backet_stack[len(self.oper_with_backet_stack)-1] == ")":
 			self.oper_with_backet_stack.pop()
 		
