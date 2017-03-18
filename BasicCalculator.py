@@ -12,7 +12,7 @@
 class Solution(object):
 	def __init__(self):
 		self.oper_with_backet_stack = []
-		self.oper_without_backet_stack = []
+		#self.oper_without_backet_stack = []
 	
 	def calculate(self, s):
 		
@@ -20,30 +20,30 @@ class Solution(object):
 			self.oper_with_backet_stack.append(v)
 			
 			if v == ")":
-				back_str = self.__get_backet_string();
+				back_str = self.__get_backet_list();
 				back_val = self.calculate_without_backet(back_str)
 				self.oper_with_backet_stack.append(back_val)
 				
-		fin_val = self.__get_backet_string()
+		fin_val = self.__get_backet_list()
 		return self.calculate_without_backet(fin_val);
 	
 	def calculate_without_backet(self, s):
 		will_cal = False
-		
+		oper_without_backet_stack = []
 		for chara in s:
-			self.oper_without_backet_stack.append(chara)
+			oper_without_backet_stack.append(chara)
 			
 			if will_cal:
-				left = self.oper_without_backet_stack.pop()
-				oper = self.oper_without_backet_stack.pop()
-				right = self.oper_without_backet_stack.pop()
+				left = oper_without_backet_stack.popleft()
+				oper = oper_without_backet_stack.popleft()
+				right = oper_without_backet_stack.popleft()
 				
 				if oper == "*":
 					res = int(left) * int(right)
 				if oper == "/":
 					res = int(left) / int(right)
 					
-				self.oper_without_backet_stack.append(res)
+				oper_without_backet_stack.append(res)
 				
 				will_cal = False
 				
@@ -52,32 +52,32 @@ class Solution(object):
 		
 		res = 0
 		
-		if len(self.oper_without_backet_stack) != 1:
+		if len(oper_without_backet_stack) != 1:
 			# now * and / should be removed
-			for i,v in enumerate(self.oper_without_backet_stack):
+			for i,v in enumerate(oper_without_backet_stack):
 				if i == 0:
 					res = int(v)
 				if v == "+":
-					res = res + int(self.oper_without_backet_stack[i + 1])
+					res = res + int(oper_without_backet_stack[i + 1])
 				if v == "-":
-					res = res = int(self.oper_without_backet_stack[i + 1])
+					res = res - int(oper_without_backet_stack[i + 1])
 			return res
 		else:
 			return self.oper_without_backet_stack[0]
 
-	def __get_backet_string(self):
+	def __get_backet_list(self):
 		
 		# )
 		if self.oper_with_backet_stack[len(self.oper_with_backet_stack)-1] == ")":
 			self.oper_with_backet_stack.pop()
-		
-		rtn_val = ""
+			
+		rtn_val_list = []
 		
 		v = self.oper_with_backet_stack.pop()
 		while v != "(" and len(self.oper_with_backet_stack) != 0:
-			rtn_val = rtn_val + str(v)
+			rtn_val_list.append(str(v))
 			v = self.oper_with_backet_stack.pop()
-		return rtn_val
+		return reversed(rtn_val_list)
 
 s = Solution()
 print s.calculate("(1+(4+5+2)-3)+(6+8)")
