@@ -50,27 +50,20 @@ class Solution(object):
 			if chara in ["*", "/"]:
 				will_cal = True
 		
-		will_cal = False
 		res = 0
-		# now * and / should be removed
-		for i,v in enumerate(self.oper_without_backet_stack):
-			
-			if will_cal:
-				left = self.oper_without_backet_stack.pop()
-				oper = self.oper_without_backet_stack.pop()
-				right = self.oper_without_backet_stack.pop()
-				
-				if oper == "+":
-					res = int(left) + int(right)
-				if oper == "-":
-					res = int(left) - int(right)
-				will_cal = False
-				self.oper_without_backet_stack.append(res)
-				
-			if v in ["+", "-"]:
-				will_cal = True
-				
-		return res
+		
+		if len(self.oper_without_backet_stack) != 1:
+			# now * and / should be removed
+			for i,v in enumerate(self.oper_without_backet_stack):
+				if i == 0:
+					res = int(v)
+				if v == "+":
+					res = res + int(self.oper_without_backet_stack[i + 1])
+				if v == "-":
+					res = res = int(self.oper_without_backet_stack[i + 1])
+			return res
+		else:
+			return self.oper_without_backet_stack[0]
 
 	def __get_backet_string(self):
 		
