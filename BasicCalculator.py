@@ -74,10 +74,14 @@ class Solution(object):
 		rtn_val_list = []
 		
 		v = self.oper_with_backet_stack.pop()
-		while v != "(" and len(self.oper_with_backet_stack) != 0:
+		while v != "(" :
 			rtn_val_list.append(str(v))
 			v = self.oper_with_backet_stack.pop()
+			if len(self.oper_with_backet_stack) == 0 and v != "(":
+				rtn_val_list.append((v))
+				break;
+				
 		return reversed(rtn_val_list)
 
 s = Solution()
-print s.calculate("(1+(4+5+2)-3)+(6+8)")
+print s.calculate("(1+1)")
