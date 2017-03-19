@@ -36,14 +36,20 @@ class Solution(object):
 
 	def __splitCal(self,s):
 		rtn_list = []
-		num_count = 0
-		temp_val = 0
+
+		temp_val = ""
 		for item in s:
 
 			if item in ['+','-','*','/','(',')']:
+				if temp_val != "":
+					rtn_list.append(temp_val)
+					temp_val = ""
 				rtn_list.append(item)
 			else:
-				temp_val = temp_val + 10**int(num_count)*item
+				temp_val = temp_val+item
+
+		if temp_val != "":
+			rtn_list.append(temp_val)
 
 		return rtn_list;
 
