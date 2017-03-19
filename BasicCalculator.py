@@ -16,6 +16,8 @@ class Solution(object):
 	
 	def calculate(self, s):
 		
+		s = s.strip()
+		
 		for v in s:
 			self.oper_with_backet_stack.append(v)
 			
@@ -24,8 +26,12 @@ class Solution(object):
 				back_val = self.calculate_without_backet(back_str)
 				self.oper_with_backet_stack.append(back_val)
 				
-		fin_val = self.__get_backet_list()
-		return self.calculate_without_backet(fin_val);
+				
+		if len(self.oper_with_backet_stack) != 1:
+			fin_val = self.__get_backet_list()
+			return self.calculate_without_backet(fin_val);
+		else:
+			return self.oper_with_backet_stack[0];
 	
 	def calculate_without_backet(self, s):
 		will_cal = False
@@ -34,14 +40,14 @@ class Solution(object):
 			oper_without_backet_stack.append(chara)
 			
 			if will_cal:
-				left = oper_without_backet_stack.popleft()
-				oper = oper_without_backet_stack.popleft()
-				right = oper_without_backet_stack.popleft()
+				left = oper_without_backet_stack.pop()
+				oper = oper_without_backet_stack.pop()
+				right = oper_without_backet_stack.pop()
 				
 				if oper == "*":
-					res = int(left) * int(right)
+					res = int(right) * int(left)
 				if oper == "/":
-					res = int(left) / int(right)
+					res = int(right) / int(left)
 					
 				oper_without_backet_stack.append(res)
 				
@@ -63,7 +69,7 @@ class Solution(object):
 					res = res - int(oper_without_backet_stack[i + 1])
 			return res
 		else:
-			return self.oper_without_backet_stack[0]
+			return oper_without_backet_stack[0]
 
 	def __get_backet_list(self):
 		
@@ -84,4 +90,4 @@ class Solution(object):
 		return reversed(rtn_val_list)
 
 s = Solution()
-print s.calculate("(1+1)")
+print s.calculate(" 30")
