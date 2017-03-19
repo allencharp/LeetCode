@@ -12,13 +12,14 @@
 class Solution(object):
 	def __init__(self):
 		self.oper_with_backet_stack = []
-		#self.oper_without_backet_stack = []
 	
 	def calculate(self, s):
 		
-		s = s.strip()
-		
-		for v in s:
+		s = s.strip().replace(" ","")
+
+		items = self.__splitCal(s)
+
+		for v in items:
 			self.oper_with_backet_stack.append(v)
 			
 			if v == ")":
@@ -29,10 +30,23 @@ class Solution(object):
 				
 		if len(self.oper_with_backet_stack) != 1:
 			fin_val = self.__get_backet_list()
-			return self.calculate_without_backet(fin_val);
+			return (int)(self.calculate_without_backet(fin_val));
 		else:
-			return self.oper_with_backet_stack[0];
-	
+			return (int)(self.oper_with_backet_stack[0]);
+
+	def __splitCal(self,s):
+		rtn_list = []
+		num_count = 0
+		temp_val = 0
+		for item in s:
+
+			if item in ['+','-','*','/','(',')']:
+				rtn_list.append(item)
+			else:
+				temp_val = temp_val + 10**int(num_count)*item
+
+		return rtn_list;
+
 	def calculate_without_backet(self, s):
 		will_cal = False
 		oper_without_backet_stack = []
@@ -90,4 +104,4 @@ class Solution(object):
 		return reversed(rtn_val_list)
 
 s = Solution()
-print s.calculate(" 30")
+print s.calculate(" ( 32 +1)")
