@@ -34,9 +34,9 @@ class Solution(object):
 		else:
 			return (int)(self.oper_with_backet_stack[0]);
 
+
 	def __splitCal(self,s):
 		rtn_list = []
-
 		temp_val = ""
 		for item in s:
 
@@ -60,14 +60,14 @@ class Solution(object):
 			oper_without_backet_stack.append(chara)
 			
 			if will_cal:
-				left = oper_without_backet_stack.pop()
+				second = oper_without_backet_stack.pop()
 				oper = oper_without_backet_stack.pop()
-				right = oper_without_backet_stack.pop()
+				first = oper_without_backet_stack.pop()
 				
 				if oper == "*":
-					res = int(right) * int(left)
+					res = int(first) * int(second)
 				if oper == "/":
-					res = int(right) / int(left)
+					res = int(first) / int(second)
 					
 				oper_without_backet_stack.append(res)
 				
