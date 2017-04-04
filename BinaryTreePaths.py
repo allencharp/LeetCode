@@ -23,28 +23,31 @@
 
 class Solution(object):
     def __init__(self):
-        self.rtnList=[]
-
+        self.rtnList = []
+        self.stack = []
 
     def binaryTreePaths(self, root):
         """
         :type root: TreeNode
         :rtype: List[str]
         """
-        if root.left is None and root.right is None:
-            return str(root.val)
-        if root.left:
-            return str(root.val) + "->" + self.binaryTreePaths(root.left)
-        if root.right:
-            return str(root.val) + "->" + self.binaryTreePaths(root.right)
+        temp = root
+        while temp:
+            self.stack.append(temp)
+            if temp.left:
+                temp = temp.left
+                continue
+            elif temp.right:
+                temp = temp.right
+                continue
+            else:
+                self.rtnList.append(format_stack_val())
+                self.stack.pop()
+                temp = self.stack[len(self.stack)-1]
 
-    def generate_path(self, root):
-        if root.left is None and root.right is None:
-            return str(root.val)
-        if root.left:
-            return str(root.val) + "->" + self.binaryTreePaths(root.left)
-        if root.right:
-            return str(root.val) + "->" + self.binaryTreePaths(root.right)
+    def format_stack_val(self):
+        return "->".join(self.stack)
+
 
 
 class TreeNode(object):
@@ -61,4 +64,10 @@ one.right = three
 two.right = five
 
 s = Solution()
-print(s.binaryTreePaths(one))
+#print(s.binaryTreePaths(one))
+a = ["aaa","bbb"]
+
+
+def format_stack_val(a):
+    return "->".join(a)
+print(format_stack_val(a))
