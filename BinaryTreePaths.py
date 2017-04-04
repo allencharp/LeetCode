@@ -22,6 +22,10 @@
 #         self.right = None
 
 class Solution(object):
+    def __init__(self):
+        self.rtnList=[]
+
+
     def binaryTreePaths(self, root):
         """
         :type root: TreeNode
@@ -29,9 +33,17 @@ class Solution(object):
         """
         if root.left is None and root.right is None:
             return str(root.val)
-        elif root.left:
+        if root.left:
             return str(root.val) + "->" + self.binaryTreePaths(root.left)
-        elif root.right:
+        if root.right:
+            return str(root.val) + "->" + self.binaryTreePaths(root.right)
+
+    def generate_path(self, root):
+        if root.left is None and root.right is None:
+            return str(root.val)
+        if root.left:
+            return str(root.val) + "->" + self.binaryTreePaths(root.left)
+        if root.right:
             return str(root.val) + "->" + self.binaryTreePaths(root.right)
 
 
@@ -44,8 +56,8 @@ five = TreeNode(5)
 two = TreeNode(2)
 three = TreeNode(3)
 one = TreeNode(1)
-one.right = two
-one.left = three
+one.left = two
+one.right = three
 two.right = five
 
 s = Solution()
