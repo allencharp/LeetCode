@@ -27,26 +27,45 @@ class Solution(object):
         self.stack = []
 
     def binaryTreePaths(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[str]
-        """
+
+        if root is None:
+            return []
+
+        if root.left is None and root.right is None:
+            return [str(root.val)]
+
+
         temp = root
+
+        current_node_from_stack = False
+
         while temp:
             self.stack.append(temp)
             if temp.left:
                 temp = temp.left
+                self.stack[len(self.stack)-1].left = None
+                current_node_from_stack = False
                 continue
             elif temp.right:
                 temp = temp.right
+                self.stack[len(self.stack) - 1].right = None
+                current_node_from_stack = False
                 continue
             else:
-                self.rtnList.append(format_stack_val())
+                if len(self.stack) < 2:
+                    break
+                if not current_node_from_stack:
+                    self.rtnList.append(self.format_stack_val())
+
                 self.stack.pop()
-                temp = self.stack[len(self.stack)-1]
+
+                temp = self.stack.pop()
+                current_node_from_stack = True
+
+        return self.rtnList
 
     def format_stack_val(self):
-        return "->".join(self.stack)
+        return "->".join([str(item.val) for item in self.stack])
 
 
 
@@ -64,10 +83,5 @@ one.right = three
 two.right = five
 
 s = Solution()
-#print(s.binaryTreePaths(one))
-a = ["aaa","bbb"]
-
-
-def format_stack_val(a):
-    return "->".join(a)
-print(format_stack_val(a))
+print(s.binaryTreePaths(five))
+#a = ["aaa","bbb"]
