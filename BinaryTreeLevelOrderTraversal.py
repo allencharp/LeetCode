@@ -27,12 +27,17 @@
 # one is maintain the binary tree level
 class Solution(object):
     def levelOrder(self, root):
+        if root is None:
+            return []
+
         rtn, level = [],[root]
         while level:
-            rtn.append([node.val for node in level])
-
+            rtn.append([node.val for node in level if node is not None])
+            temp = []
             for node in level:
-                level.extend([node.left, node.right])
+                temp.extend([node.left, node.right])
+            level = [exist for exist in temp if exist is not None]
+        return rtn
 
 s = Solution()
 print(s.levelOrder([3,9,20,"null","null",15,7]))
