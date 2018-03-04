@@ -5,25 +5,12 @@
 
 class Solution(object):
     def maxSubArray(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        pass
 
-import asyncio
+        sum_list_num = []
 
+        start_index, continue_index, end_index = 0
 
-async def coroutine():
-    print('in coroutine')
-    return 'result'
+        for index in range(len(nums)):
+            pass
 
-
-event_loop = asyncio.get_event_loop()
-try:
-    return_value = event_loop.run_until_complete(
-        coroutine()
-    )
-    print('it returned: {!r}'.format(return_value))
-finally:
-    event_loop.close()
+        return max(sum_list_num)

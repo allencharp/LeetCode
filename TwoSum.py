@@ -36,4 +36,4 @@ class Solution:
 
 s = Solution()
 a = [3,2,4,5]
-print s.twoSum(a,6)
+print(s.twoSum(a,6))

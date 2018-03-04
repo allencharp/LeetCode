@@ -34,6 +34,6 @@ class Solution(object):
 
 
 s = Solution()
-print s.moveZeroes([1,3,0,5,0,2])
+print(s.moveZeroes([1,3,0,5,0,2]))
 
 
