@@ -8,20 +8,25 @@
 class Solution(object):
     def maxSubArray(self, nums):
 
-        max = 0
-
         if not nums:
             return 0
 
+        if len(nums) == 1:
+            return nums[0]
+
+        max = min(nums)
+
         for index1 in range(len(nums)):
-            for index2 in range(index1, len(nums)):
-                if max < sum(nums[index1: index1+index2]):
-                    max = sum(nums[index1: index1+index2])
-                    print(max)
+            if nums[index1] <= 0 and max > 0:
+                continue
+            for index2 in range(index1, len(nums)+1):
+
+                if nums[index1: index2+1] and max < sum(nums[index1: index2+1]):
+                    max = sum(nums[index1: index2+1])
+
 
         return max
 
 
-
 s = Solution()
-print(s.maxSubArray([4,-1,2,1]))
+print(s.maxSubArray([-2,0,-1]))
