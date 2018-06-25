@@ -29,7 +29,7 @@ class Solution(object):
                     if i == 0:
                         temp_every_time_list.append([v] + [value])
                         continue
-                    temp_every_time_list.append(itemList[index:len(itemList)] + [v] + itemList[index:])
+                    temp_every_time_list.append(itemList[0:index] + [v] + itemList[index:])
                 temp_every_time_list.append(itemList + [v])
             temp_list = temp_every_time_list
 
@@ -39,7 +39,12 @@ class Solution(object):
 
 
 
-temp = ["a","b","c"]
+itemList = ["a"]
+# temp_every_time_list = []
+# v = "d"
+# for index, value in enumerate(itemList):
+#     temp_every_time_list.append(itemList[0:index] + [v] + itemList[index:])
+# print(temp_every_time_list)
 
 s = Solution()
-print(s.permute(temp))
+print(s.permute(itemList))
