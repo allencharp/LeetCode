@@ -16,30 +16,27 @@ class Solution(object):
 
     def permute(self, nums):
 
-        temp_list = []
+        return_list = []
 
         for i,v in enumerate(nums):
             if i == 0:
-                temp_list.append([v])
+                return_list.append([v])
                 continue
 
             temp_every_time_list = []
-            for itemList in temp_list:
+            for itemList in return_list:
                 for index,value in enumerate(itemList):
-                    if i == 0:
-                        temp_every_time_list.append([v] + [value])
-                        continue
                     temp_every_time_list.append(itemList[0:index] + [v] + itemList[index:])
-                temp_every_time_list.append(itemList + [v])
-            temp_list = temp_every_time_list
+                temp_every_time_list.append(itemList + [v]) # add the last one
+            return_list = temp_every_time_list
 
-        return temp_list
-
-
+        return return_list
 
 
 
-itemList = ["a"]
+
+
+itemList = ["a","b","c"]
 # temp_every_time_list = []
 # v = "d"
 # for index, value in enumerate(itemList):
