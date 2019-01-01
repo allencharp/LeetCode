@@ -13,5 +13,9 @@ class Solution(object):
 
         return max(nums)
 
+
 s = Solution()
+s.aaa = 2
+
+print(Solution.aaa)
 print(s.maxSubArray([-2,0,-1,2]))
