@@ -10,6 +10,7 @@
 # Output: 8
 # Note:
 # Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?
+from collections import Counter
 
 class Solution(object):
     def missingNumber(self, nums):
@@ -17,13 +18,13 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        list_nums = [i for i in range(len(nums)+1)]
-        print(list_nums)
-        for i,v in enumerate(nums):
-            list_nums.remove(v)
+        [nums.append(i) for i in range(len(nums))]
 
-        print(list_nums[0])
-        return list_nums[0]
+        count = Counter()
+        for i,v in enumerate(nums):
+            count[v] += 1
+
+        print(count)
 
 
 s = Solution()
