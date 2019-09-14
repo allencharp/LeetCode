@@ -104,7 +104,7 @@ class Solution(object):
             else:
                 result_list.append(1000)
                 index += 1
-        return sum(result_list)
+        return []
 
 s = Solution()
 print(s.romanToInt('MCMXCIV'))
